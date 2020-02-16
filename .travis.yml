@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t chitzkoy/multi-client-test -f ./client/Dockerfile.dev ./client
+  - docker build -t dtikhonov/multi-client-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true chitzkoy/multi-client-test npm run test
+  - docker run -e CI=true dtikhonov/multi-client-test npm run test
 
 after_success:
-  - docker build -t chitzkoy/multi-client ./client
-  - docker build -t chitzkoy/multi-nginx ./nginx
-  - docker build -t chitzkoy/multi-server ./server
-  - docker build -t chitzkoy/multi-worker ./worker
+  - docker build -t dtikhonov/multi-client ./client
+  - docker build -t dtikhonov/multi-nginx ./nginx
+  - docker build -t dtikhonov/multi-server ./server
+  - docker build -t dtikhonov/multi-worker ./worker
   # Log in into docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push images to the Docker hub
-  - docker push chitzkoy/multi-client
-  - docker push chitzkoy/multi-nginx
-  - docker push chitzkoy/multi-server
-  - docker push chitzkoy/multi-worker
+  - docker push dtikhonov/multi-client
+  - docker push dtikhonov/multi-nginx
+  - docker push dtikhonov/multi-server
+  - docker push dtikhonov/multi-worker
