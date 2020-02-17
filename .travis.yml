@@ -20,3 +20,16 @@ after_success:
   - docker push dtikhonov/multi-nginx
   - docker push dtikhonov/multi-server
   - docker push dtikhonov/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  region: eu-central-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-eu-central-1-651416516786
+  bucket_path: docker-multi
+  on:
+    branch: master
